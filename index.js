@@ -7,11 +7,11 @@ const values = require('lodash.values');
 // Constants for the particle simulation.
 const MAX_PARTICLES = 500;
 const PARTICLE_NUM_RANGE = () => 5 + Math.round(Math.random() * 5);
-const PARTICLE_GRAVITY = 0.075;
-const PARTICLE_ALPHA_FADEOUT = 0.96;
+const PARTICLE_GRAVITY = 0.175;
+const PARTICLE_ALPHA_FADEOUT = 0.97;
 const PARTICLE_VELOCITY_RANGE = {
   x: [-1, 1],
-  y: [-3.5, -1.5]
+  y: [-0.5, 3]
 };
 
 // Our extension's custom redux middleware. Here we can intercept redux actions and respond to them.
@@ -161,7 +161,7 @@ exports.decorateTerm = (Term, { React, notify }) => {
       const length = this._particles.length;
       const colors = this.props.wowMode
         ? values(this.props.colors).map(toHex)
-        : [toHex(this.props.cursorColor)];
+        : ["#FFFF00", "#FFFF00", "#FFFF00", "#FFCC00", "#FFAA00", "#FF8800"];
       const numParticles = PARTICLE_NUM_RANGE();
       for (let i = 0; i < numParticles; i++) {
         const colorCode = colors[i % colors.length];
@@ -181,7 +181,7 @@ exports.decorateTerm = (Term, { React, notify }) => {
     _createParticle (x, y, color) {
       return {
         x,
-        y: y,
+        y: y + 18,
         alpha: 1,
         color,
         velocity: {
